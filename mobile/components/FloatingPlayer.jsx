@@ -16,7 +16,7 @@ function FloatingPlayer() {
 
   return (
     <View
-      className={`absolute flex-row items-center self-center justify-around w-screen h-16 bg-indigo-900 rounded-2xl bottom-14 px-2`}
+      className={`absolute flex-row items-center self-center justify-around w-screen h-14 bg-indigo-900 rounded-2xl bottom-14 px-2`}
     >
       <Pressable onPress={onPress} className="justify-center w-4/5 h-full">
         <MarqueeText text={track?.title ?? ""} />
