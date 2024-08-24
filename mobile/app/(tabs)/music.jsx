@@ -7,6 +7,7 @@ import { router } from "expo-router";
 import TrackPlayer from "react-native-track-player";
 import MusicCard from "../../components/MusicCard";
 import SearchSound from "../../components/SearchSound";
+import ItemDivider from "../../components/ui/ItemDivider";
 import ScreenContainer from "../../components/ui/ScreenContainer";
 import { generateTrackPlayerSongsFormat, getSounds } from "../../lib/sound";
 import { addComputedTracks, addTracks, useTracks } from "../../stores/library";
@@ -68,6 +69,8 @@ export default function MainPage() {
       <FlatList
         className="px-2"
         data={tracks}
+        ItemSeparatorComponent={<ItemDivider h="1" />}
+        ListFooterComponent={<ItemDivider h="24" />}
         renderItem={({ item: sound }) => (
           <MusicCard
             title={sound.title}

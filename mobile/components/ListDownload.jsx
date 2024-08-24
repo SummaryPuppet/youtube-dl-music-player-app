@@ -5,10 +5,10 @@ import {
   FlatList,
   RefreshControl,
   Text,
-  View,
 } from "react-native";
 import { allSongs, downloadInDevice } from "../lib/downloadSongs";
 import DownloadCard from "./DownloadCard";
+import ItemDivider from "./ui/ItemDivider";
 
 export default function ListDownload() {
   const [serverSongs, setServerSongs] = useState([]);
@@ -49,11 +49,11 @@ export default function ListDownload() {
         <FlatList
           data={serverSongs}
           keyExtractor={(item) => item.id}
-          ItemSeparatorComponent={<View className="h-2 bg-indigo-900/20" />}
+          ItemSeparatorComponent={<ItemDivider />}
           ListEmptyComponent={
             <Text className="text-lg text-white">No connect to server</Text>
           }
-          ListFooterComponent={<View className="h-24 bg-indigo-900/20" />}
+          ListFooterComponent={<ItemDivider h="24" />}
           renderItem={({ item }) => (
             <DownloadCard
               title={item.title}
