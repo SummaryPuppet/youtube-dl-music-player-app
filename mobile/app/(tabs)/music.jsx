@@ -12,19 +12,6 @@ import { generateTrackPlayerSongsFormat, getSounds } from "../../lib/sound";
 import { addComputedTracks, addTracks, useTracks } from "../../stores/library";
 
 export default function MainPage() {
-  /*
-  const {
-    isPlay,
-    changeIsPlay,
-    sound,
-    setSound,
-    setNameActiveSound,
-    setSoundFile,
-    soundsInDevice,
-    setSoundsInDevice,
-    addToQueue,
-    clearQueue,
-  } = useSound();*/
   const insets = useSafeAreaInsets();
   const tracks = useTracks();
   const [refreshing, setRefreshing] = useState(false);
