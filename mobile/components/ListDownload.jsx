@@ -1,18 +1,28 @@
 import { useEffect, useState } from "react";
-import { ActivityIndicator, FlatList, RefreshControl } from "react-native";
+import {
+  ActivityIndicator,
+  Alert,
+  FlatList,
+  RefreshControl,
+  View,
+} from "react-native";
 import { allSongs, downloadInDevice } from "../lib/downloadSongs";
 import DownloadCard from "./DownloadCard";
 
 export default function ListDownload() {
   const [serverSongs, setServerSongs] = useState([]);
   const [refreshing, setRefreshing] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const loadSongs = async () => {
     try {
+      setLoading(true);
       const data = await allSongs();
       setServerSongs(data);
     } catch (error) {
-      console.error(error);
+      Alert.alert(error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -28,16 +38,17 @@ export default function ListDownload() {
 
   useEffect(() => {
     loadSongs();
-  }, [setServerSongs]);
+  }, []);
 
   return (
     <>
-      {serverSongs.length === 0 ? (
+      {loading ? (
         <ActivityIndicator />
       ) : (
         <FlatList
           data={serverSongs}
           keyExtractor={(item) => item.id}
+          ItemSeparatorComponent={<View className="h-2 bg-indigo-900/20" />}
           renderItem={({ item }) => (
             <DownloadCard
               title={item.title}
