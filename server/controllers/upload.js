@@ -49,20 +49,7 @@ export const upload = async (req, res) => {
 
         response.data.pipe(writer)
 
-        const tags = {
-            artist: author,
-            image: {
-                mime: "image/jpg",
-                type: {
-                    id: 3,
-                    name: "Cover (front)"
-                },
-                description: "Cover",
-                imageBuffer: fs.readFileSync(outputThumbnail)
-            }
-        }
-
-        writeMetadata(tags, outputSong)
+        await writeMetadata({ title, author, outputThumbnail }, outputSong)
 
         await insertSong(title, outputThumbnail)
 
@@ -93,6 +80,6 @@ async function getInfoFromSong(url) {
         outputSong,
         thumbnailURL,
         outputThumbnail,
-        author
+        author: author.name
     }
 }
