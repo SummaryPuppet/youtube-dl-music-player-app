@@ -39,11 +39,16 @@ export const setupTrackPlayer = async () => {
 }
 
 export const generateTrackPlayerSongsFormat = (array) => {
-    return array.map(({ uri, filename, duration }) => ({
-        url: uri,
-        title: filename.split(".").length > 2 ? filename : filename.split(".")[0],
-        duration
-    }))
+    return array.map(({ uri, filename, duration }) => {
+        const title = filename.split(".")
+        title.pop()
+
+        return {
+            url: uri,
+            title: title.join(''),
+            duration
+        }
+    })
 }
 
 
