@@ -3,7 +3,7 @@ import { Image, Pressable, StyleSheet, Text } from "react-native";
 export default function DownloadCard({ title, imgUrl, onPress, onPressProp }) {
   return (
     <Pressable
-      className="flex-row gap-3 py-2 mb-2 border-b-4 rounded border-b-indigo-900/20"
+      className="flex-row gap-3 py-2 mb-2 rounded"
       onPress={() => onPress(onPressProp)}
     >
       <Image
