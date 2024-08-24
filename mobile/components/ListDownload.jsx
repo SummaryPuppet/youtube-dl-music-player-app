@@ -4,6 +4,7 @@ import {
   Alert,
   FlatList,
   RefreshControl,
+  Text,
   View,
 } from "react-native";
 import { allSongs, downloadInDevice } from "../lib/downloadSongs";
@@ -49,6 +50,10 @@ export default function ListDownload() {
           data={serverSongs}
           keyExtractor={(item) => item.id}
           ItemSeparatorComponent={<View className="h-2 bg-indigo-900/20" />}
+          ListEmptyComponent={
+            <Text className="text-lg text-white">No connect to server</Text>
+          }
+          ListFooterComponent={<View className="h-24 bg-indigo-900/20" />}
           renderItem={({ item }) => (
             <DownloadCard
               title={item.title}
