@@ -1,6 +1,7 @@
 import Feather from "@expo/vector-icons/Feather";
 import { Pressable, Text } from "react-native";
 import { primaryColor } from "../constants/colors";
+
 import Card from "./ui/Card";
 
 export default function MusicCard({ title, titleOnPress, sound, moreOnPress }) {

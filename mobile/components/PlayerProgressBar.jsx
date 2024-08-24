@@ -1,39 +1,29 @@
 import { useEffect } from "react";
 import { Slider } from "react-native-awesome-slider";
 import { useSharedValue } from "react-native-reanimated";
-import { useSound } from "../stores/sound";
+import TrackPlayer, { useProgress } from "react-native-track-player";
 
 export default function PlayerProgressBar() {
-  const { sound } = useSound();
+  const { position, duration } = useProgress();
 
-  const duration = useSharedValue(0);
   const min = useSharedValue(0);
-  const progress = useSharedValue(30);
+  const max = useSharedValue(1);
+  const progress = useSharedValue(0);
 
   const handleSliderChange = async (newPositionNumber) => {
-    if (sound) {
-      await sound.setPositionAsync(Math.floor(newPositionNumber));
-    }
+    await TrackPlayer.seekTo(newPositionNumber * duration);
   };
 
   useEffect(() => {
-    function load() {
-      sound.setOnPlaybackStatusUpdate((status) => {
-        if (status.isLoaded) {
-          duration.value = status.durationMillis;
-          progress.value = status.positionMillis;
-        }
-      });
-    }
-    load();
-  }, [sound, duration, progress]);
+    progress.value = duration > 0 ? position / duration : 0;
+  });
 
   return (
     <Slider
       className="flex-none w-full"
       progress={progress}
       minimumValue={min}
-      maximumValue={duration}
+      maximumValue={max}
       onSlidingComplete={(newPosition) => handleSliderChange(newPosition)}
     />
   );

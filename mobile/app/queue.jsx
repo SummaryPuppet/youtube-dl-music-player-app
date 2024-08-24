@@ -1,17 +1,28 @@
-import { router } from "expo-router";
-import { FlatList, Text } from "react-native";
+import { useEffect, useState } from "react";
+import { FlatList, Pressable, Text } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import TrackPlayer, { useActiveTrack } from "react-native-track-player";
 import Card from "../components/ui/Card";
 import ScreenContainer from "../components/ui/ScreenContainer";
-import { useSound } from "../stores/sound";
 
 export default function QueueScreen() {
-  const { playbackQueue, soundFile } = useSound();
   const insets = useSafeAreaInsets();
+  const activeTrack = useActiveTrack();
+  const [tracks, setTracks] = useState([]);
 
-  if (playbackQueue.length === 0) {
-    router("/");
-  }
+  const onPress = async (trackIndex) => {
+    await TrackPlayer.skip(trackIndex);
+  };
+
+  useEffect(() => {
+    TrackPlayer.getQueue()
+      .then((t) => setTracks(t))
+      .catch((e) => console.error(e));
+  }, []);
+
+  // if (playbackQueue.length === 0) {
+  //   router("/");
+  // }
 
   return (
     <ScreenContainer
@@ -21,15 +32,17 @@ export default function QueueScreen() {
       <Text className="px-3 text-4xl font-semibold text-white">Queue: </Text>
       <FlatList
         className="px-2"
-        data={playbackQueue}
-        renderItem={({ item }) => (
+        data={tracks}
+        renderItem={({ item: track, index }) => (
           <Card
-            className={`${item.filename === soundFile.filename ? "bg-indigo-500/50 rounded-lg" : ""} px-3`}
+            className={`${track?.title === activeTrack?.title ? "bg-indigo-500/50 rounded-lg" : ""} px-3`}
           >
-            <Text className={`text-xl text-white`}>{item.filename}</Text>
+            <Pressable onPress={() => onPress(index)}>
+              <Text className={`text-xl text-white`}>{track?.title}</Text>
+            </Pressable>
           </Card>
         )}
-        extraData={soundFile}
+        extraData={activeTrack}
       />
     </ScreenContainer>
   );

@@ -1,14 +1,18 @@
-import { router } from "expo-router";
+// import { router } from "expo-router";
 import { useEffect, useState } from "react";
-import { Alert, FlatList, RefreshControl } from "react-native";
+import { Alert, FlatList, RefreshControl, Text } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+// import MusicCard from "../../components/MusicCard";
+import { router } from "expo-router";
+import TrackPlayer from "react-native-track-player";
 import MusicCard from "../../components/MusicCard";
+import SearchSound from "../../components/SearchSound";
 import ScreenContainer from "../../components/ui/ScreenContainer";
-import { sendNotification } from "../../lib/notifications";
-import { createSound, getSounds } from "../../lib/sound";
-import { useSound } from "../../stores/sound";
+import { generateTrackPlayerSongsFormat, getSounds } from "../../lib/sound";
+import { addComputedTracks, addTracks, useTracks } from "../../stores/library";
 
 export default function MainPage() {
+  /*
   const {
     isPlay,
     changeIsPlay,
@@ -20,8 +24,9 @@ export default function MainPage() {
     setSoundsInDevice,
     addToQueue,
     clearQueue,
-  } = useSound();
+  } = useSound();*/
   const insets = useSafeAreaInsets();
+  const tracks = useTracks();
   const [refreshing, setRefreshing] = useState(false);
 
   const loadSounds = async () => {
@@ -29,35 +34,17 @@ export default function MainPage() {
     const dataFiltered = data.filter(
       (value) => !value?.filename?.startsWith("AUD")
     );
-    setSoundsInDevice(dataFiltered);
+
+    const trackPlayerData = generateTrackPlayerSongsFormat(dataFiltered);
+    addTracks(trackPlayerData);
+    addComputedTracks(trackPlayerData);
   };
 
-  const onPress = async (item) => {
+  const onPress = async (sound) => {
     try {
-      if (isPlay) {
-        sound.unloadAsync();
-        changeIsPlay();
-        clearQueue();
-      }
-
-      const s = await createSound(item.uri);
-      setSound(s);
-      changeIsPlay();
-
-      const itemName =
-        item.filename.split(".").length > 2
-          ? item.filename
-          : item.filename.split(".")[0];
-      setNameActiveSound(itemName);
-
-      setSoundFile(item);
-      addToQueue(item);
-
-      sendNotification({
-        title: `Playing Song 🎶`,
-        body: `You're listening: ${itemName}`,
-        data: item,
-      });
+      await TrackPlayer.reset();
+      await TrackPlayer.add(sound);
+      await TrackPlayer.play();
 
       router.push("/player");
     } catch (error) {
@@ -65,8 +52,8 @@ export default function MainPage() {
     }
   };
 
-  const moreOnPress = (item) => {
-    addToQueue(item);
+  const moreOnPress = async (sound) => {
+    await TrackPlayer.add(sound);
     Alert.alert("Add to queue");
   };
 
@@ -88,12 +75,15 @@ export default function MainPage() {
       }}
       className="h-screen"
     >
+      <Text className="px-2 text-3xl font-bold text-white">Search: </Text>
+      <SearchSound />
+
       <FlatList
         className="px-2"
-        data={soundsInDevice}
+        data={tracks}
         renderItem={({ item: sound }) => (
           <MusicCard
-            title={sound.filename}
+            title={sound.title}
             titleOnPress={onPress}
             sound={sound}
             moreOnPress={moreOnPress}

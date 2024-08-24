@@ -1,4 +1,5 @@
 import { Text, View } from "react-native";
+import { useActiveTrack } from "react-native-track-player";
 import MuteButton from "../components/MuteButton";
 import {
   PlayButton,
@@ -9,10 +10,9 @@ import PlayerProgressBar from "../components/PlayerProgressBar";
 import QueueButton from "../components/QueueButton";
 import RepeatButton from "../components/RepeatButton";
 import ScreenContainer from "../components/ui/ScreenContainer";
-import { useSound } from "../stores/sound";
 
 export default function PlayerModalPage() {
-  const nameActiveSound = useSound((state) => state.nameActiveSound);
+  const track = useActiveTrack();
 
   return (
     <ScreenContainer className={`items-center h-full`}>
@@ -24,7 +24,7 @@ export default function PlayerModalPage() {
         </View>
 
         <Text className="text-xl font-semibold text-center text-white ">
-          {nameActiveSound}
+          {track?.title ?? ""}
         </Text>
 
         <View className="flex-row items-center justify-around">

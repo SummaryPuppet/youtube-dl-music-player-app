@@ -1,9 +1,18 @@
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
+import { useEffect } from "react";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { SafeAreaProvider } from "react-native-safe-area-context";
+import TrackPlayer from "react-native-track-player";
+import { setupTrackPlayer } from "../lib/sound";
+
+TrackPlayer.registerPlaybackService(() => require("../services/service.js"));
 
 export default function RootLayout() {
+  useEffect(() => {
+    setupTrackPlayer();
+  }, []);
+
   return (
     <SafeAreaProvider>
       <GestureHandlerRootView>

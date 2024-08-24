@@ -56,9 +56,13 @@ export const downloadInDevice = async (title, id) => {
 export const allSongs = async () => {
     try {
         const host = await HOST()
-        const response = await fetch(await HOST()).then(res => res.json())
+        const response = await fetch(await HOST())
 
-        const songs = response.map(item => {
+        if (!response.ok) throw new Error("Error in response")
+
+        const data = await response.json()
+
+        const songs = data.map(item => {
             return {
                 id: item.id,
                 title: item.title,

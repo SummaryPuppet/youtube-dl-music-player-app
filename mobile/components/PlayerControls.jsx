@@ -1,17 +1,18 @@
 import Feather from "@expo/vector-icons/Feather";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { Pressable } from "react-native";
-import { playStop } from "../lib/sound";
-import { useSound } from "../stores/sound";
+import TrackPlayer, { useIsPlaying } from "react-native-track-player";
 
 export const PlayButton = ({ size = 58, color = "white" }) => {
-  const { isPlay, sound, changeIsPlay } = useSound();
+  const { playing } = useIsPlaying();
 
   const onPress = async () => {
-    changeIsPlay();
-
     try {
-      await playStop(sound, isPlay);
+      if (playing) {
+        await TrackPlayer.pause();
+      } else {
+        await TrackPlayer.play();
+      }
     } catch (error) {
       console.error("Player controls" + error);
     }
@@ -19,17 +20,15 @@ export const PlayButton = ({ size = 58, color = "white" }) => {
 
   return (
     <Pressable onPress={onPress}>
-      <Feather name={isPlay ? "pause" : "play"} color={color} size={size} />
+      <Feather name={playing ? "pause" : "play"} color={color} size={size} />
     </Pressable>
   );
 };
 
 export const SkipToPreviousButton = ({ size = 38, color = "white" }) => {
-  const { playPreviousInQueue } = useSound();
-
-  const onPress = () => {
+  const onPress = async () => {
     try {
-      playPreviousInQueue();
+      await TrackPlayer.skipToPrevious();
     } catch (error) {
       console.error(error);
     }
@@ -43,11 +42,9 @@ export const SkipToPreviousButton = ({ size = 38, color = "white" }) => {
 };
 
 export const SkipToNextButton = ({ size = 38, color = "white" }) => {
-  const { playNextInQueue } = useSound();
-
-  const onPress = () => {
+  const onPress = async () => {
     try {
-      playNextInQueue();
+      await TrackPlayer.skipToNext();
     } catch (error) {
       console.error(error);
     }

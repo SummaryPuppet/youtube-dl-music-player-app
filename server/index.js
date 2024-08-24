@@ -1,14 +1,15 @@
+import cors from 'cors'
 import express from "express"
 import { download } from "./controllers/download.js"
 import { thumbnail } from './controllers/thumbnail.js'
 import { upload } from "./controllers/upload.js"
 import { createSongsTable, selectSongs } from './db.js'
 
-
 const app = express()
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
+app.use(cors())
 
 createSongsTable()
 

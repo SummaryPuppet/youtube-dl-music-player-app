@@ -1,24 +1,23 @@
 import Feather from "@expo/vector-icons/Feather";
+import { useEffect, useState } from "react";
 import { Pressable } from "react-native";
-import { useSound } from "../stores/sound";
+import { alternateLoop, isLooping } from "../lib/sound";
 
 export default function RepeatButton({
   size = 35,
   colorActive = "white",
   colorOff = "#aaa",
 }) {
-  const { sound, isLoop, changeIsLoop } = useSound();
+  const [isLoop, setIsLoop] = useState(false);
 
   const onPress = async () => {
-    if (sound) {
-      if (!isLoop) {
-        await sound.setIsLoopingAsync(true);
-      } else {
-        await sound.setIsLoopingAsync(false);
-      }
-      changeIsLoop();
-    }
+    const isL = await alternateLoop();
+    setIsLoop(isL);
   };
+
+  useEffect(() => {
+    isLooping().then((isL) => setIsLoop(isL));
+  }, []);
 
   return (
     <Pressable onPress={onPress}>

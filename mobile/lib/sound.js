@@ -1,9 +1,13 @@
-import { Audio } from 'expo-av';
 import * as MediaLibrary from 'expo-media-library';
+import { Platform } from 'react-native';
+import TrackPlayer, { Capability, RepeatMode } from 'react-native-track-player';
+
 
 export const getSounds = () => {
     return new Promise(async (resolve, reject) => {
         try {
+            if (Platform.OS === "web") return []
+
             await requestPermissions()
             const sounds = getAssets()
             resolve(sounds)
@@ -13,32 +17,65 @@ export const getSounds = () => {
     })
 }
 
-export const createSound = async (fileUri) => {
-    try {
-        const { sound } = await Audio.Sound.createAsync({
-            uri: fileUri
-        }, {
-            shouldPlay: true
-        })
+export const setupTrackPlayer = async () => {
+    await TrackPlayer.setupPlayer()
 
-        return sound
-    } catch (e) {
-        console.error(e)
+    await TrackPlayer.updateOptions({
+        stopWithApp: true,
+        capabilities: [
+            Capability.Play,
+            Capability.Pause,
+            Capability.SkipToNext,
+            Capability.SkipToPrevious,
+            Capability.Stop
+        ],
+        compactCapabilities: [
+            Capability.Play,
+            Capability.Pause,
+        ]
+    });
+
+    await TrackPlayer.setRepeatMode(RepeatMode.Queue)
+}
+
+export const generateTrackPlayerSongsFormat = (array) => {
+    return array.map(({ uri, filename, duration }) => ({
+        url: uri,
+        title: filename.split(".").length > 2 ? filename : filename.split(".")[0],
+        duration
+    }))
+}
+
+
+export const alternateMute = async () => {
+    const volume = await TrackPlayer.getVolume()
+
+    if (volume === 0) {
+        await TrackPlayer.setVolume(1)
+        return 1
+    } else {
+        await TrackPlayer.setVolume(0)
+        return 0
     }
 }
 
-export const playStop = async (sound, isPlay) => {
-    try {
-        if (!isPlay) {
-            await sound.playAsync()
-        } else {
-            await sound.pauseAsync()
-        }
-    } catch (error) {
-        console.error(error)
-    }
+export const isLooping = async () => {
+    const loop = await TrackPlayer.getRepeatMode()
+
+    return loop === RepeatMode.Queue
 }
 
+export const alternateLoop = async () => {
+    const loop = await TrackPlayer.getRepeatMode()
+
+    if (loop === RepeatMode.Queue) {
+        await TrackPlayer.setRepeatMode(RepeatMode.Track)
+        return true
+    } else {
+        await TrackPlayer.setRepeatMode(RepeatMode.Queue)
+        return false
+    }
+}
 
 
 const requestPermissions = async () => {

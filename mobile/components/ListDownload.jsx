@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { ActivityIndicator, FlatList, RefreshControl } from "react-native";
 import { allSongs, downloadInDevice } from "../lib/downloadSongs";
-import MusicCard from "./DownloadCard";
+import DownloadCard from "./DownloadCard";
 
 export default function ListDownload() {
   const [serverSongs, setServerSongs] = useState([]);
@@ -39,7 +39,7 @@ export default function ListDownload() {
           data={serverSongs}
           keyExtractor={(item) => item.id}
           renderItem={({ item }) => (
-            <MusicCard
+            <DownloadCard
               title={item.title}
               imgUrl={item.thumbnail}
               onPress={onPress}

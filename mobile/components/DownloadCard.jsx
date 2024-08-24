@@ -11,7 +11,9 @@ export default function DownloadCard({ title, imgUrl, onPress, onPressProp }) {
         className="rounded-xl"
         source={{ uri: imgUrl }}
       />
-      <Text className="text-lg text-white/90">{title}</Text>
+      <Text className="w-3/4 text-lg text-white/90" numberOfLines={1}>
+        {title}
+      </Text>
     </Pressable>
   );
 }
