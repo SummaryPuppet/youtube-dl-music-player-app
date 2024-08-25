@@ -43,10 +43,13 @@ export const generateTrackPlayerSongsFormat = (array) => {
         const title = filename.split(".")
         title.pop()
 
+        let artwork
+
         return {
             url: uri,
             title: title.join(''),
-            duration
+            duration,
+            artwork
         }
     })
 }
