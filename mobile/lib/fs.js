@@ -50,6 +50,16 @@ export const getInfo = async (directoryUri) => {
     }
 }
 
+export const saveImg = (title, base64) => {
+    const fileURI = FileSystem.documentDirectory + title + ".jpg"
+
+    FileSystem.writeAsStringAsync(fileURI, base64, {
+        encoding: FileSystem.EncodingType.Base64
+    })
+
+    return fileURI
+}
+
 export const convertUriToFilePath = async (uri) => {
     try {
         const { uri: fileURI } = await FileSystem.getContentUriAsync(uri)
