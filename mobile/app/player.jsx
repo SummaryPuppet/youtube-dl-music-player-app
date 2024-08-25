@@ -1,5 +1,6 @@
 import { Text, View } from "react-native";
 import { useActiveTrack } from "react-native-track-player";
+import ArtworkImage from "../components/ArtworkImage";
 import MuteButton from "../components/MuteButton";
 import {
   PlayButton,
@@ -17,7 +18,8 @@ export default function PlayerModalPage() {
   return (
     <ScreenContainer className={`items-center h-full`}>
       <View className="justify-around flex-1 h-ful">
-        <View className="self-center bg-indigo-700 rounded-3xl h-72 w-72" />
+        <ArtworkImage uri={track?.artwork} />
+        {/* <View className="self-center bg-indigo-700 rounded-3xl h-72 w-72" /> */}
 
         <View className="px-2">
           <PlayerProgressBar />
