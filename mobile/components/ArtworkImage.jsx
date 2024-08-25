@@ -6,8 +6,5 @@ export default function ArtworkImage({ uri = "" }) {
     return <ImagePlaceholder className="self-center" />;
   }
 
-  console.log("no soy undefined");
-  console.log(uri);
-
   return <Image style={{ width: 200, height: 200 }} source={{ uri }} />;
 }
