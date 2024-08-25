@@ -10,7 +10,7 @@ TrackPlayer.registerPlaybackService(() => require("../services/service.js"));
 
 export default function RootLayout() {
   useEffect(() => {
-    setupTrackPlayer();
+    setupTrackPlayer().catch((err) => console.error(err));
   }, []);
 
   return (
