@@ -19,7 +19,6 @@ export default function PlayerModalPage() {
     <ScreenContainer className={`items-center h-full`}>
       <View className="justify-around flex-1 h-ful">
         <ArtworkImage uri={track?.artwork} />
-        {/* <View className="self-center bg-indigo-700 rounded-3xl h-72 w-72" /> */}
 
         <View className="px-2">
           <PlayerProgressBar />
