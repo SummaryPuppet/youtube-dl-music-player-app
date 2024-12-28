@@ -1,9 +1,7 @@
-// import { router } from "expo-router";
+import { router } from "expo-router";
 import { useEffect, useState } from "react";
 import { Alert, FlatList, RefreshControl, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-// import MusicCard from "../../components/MusicCard";
-import { router } from "expo-router";
 import TrackPlayer from "react-native-track-player";
 import MusicCard from "../../components/MusicCard";
 import SearchSound from "../../components/SearchSound";
