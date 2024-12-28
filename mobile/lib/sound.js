@@ -94,9 +94,26 @@ const requestPermissions = async () => {
 }
 
 const getAssets = async () => {
-    const media = await MediaLibrary.getAssetsAsync({
-        mediaType: "audio"
-    })
+    try {
+        const assets = []
+        let hasNextPage = true;
+        let after = null;
 
-    return media.assets
+        while (hasNextPage) {
+            const { assets: currentAssets, hasNextPage: nextPage, endCursor } = await MediaLibrary.getAssetsAsync({
+                mediaType: "audio",
+                first: 50,
+                after,
+            });
+            assets.push(...currentAssets);
+            hasNextPage = nextPage;
+            after = endCursor;
+        }
+
+
+        return assets
+    } catch (error) {
+        console.error(error)
+        return []
+    }
 }
