@@ -1,6 +1,6 @@
 // import { router } from "expo-router";
 import { useEffect, useState } from "react";
-import { Alert, FlatList, RefreshControl } from "react-native";
+import { Alert, FlatList, RefreshControl, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 // import MusicCard from "../../components/MusicCard";
 import { router } from "expo-router";
@@ -68,8 +68,8 @@ export default function MainPage() {
       <FlatList
         className="px-2"
         data={tracks}
-        ItemSeparatorComponent={<ItemDivider h="1" />}
-        ListFooterComponent={<ItemDivider h="24" />}
+        ItemSeparatorComponent={() => <ItemDivider h="1" />}
+        ListFooterComponent={() => <View className="h-5" />}
         renderItem={({ item: sound }) => (
           <MusicCard
             title={sound.title}
