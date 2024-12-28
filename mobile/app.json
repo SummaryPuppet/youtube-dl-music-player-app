@@ -37,6 +37,14 @@
         {
           "launchMode": "most-recent"
         }
+      ],
+      [
+      "expo-build-properties",
+      {
+        "android" : {
+          "usesCleartextTraffic": true
+        }
+      }
       ]
     ],
     "extra": {
