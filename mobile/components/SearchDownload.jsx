@@ -1,9 +1,12 @@
 import { useState } from "react";
-import { Alert, Pressable, Text, TextInput } from "react-native";
+import { Alert, Text, TextInput } from "react-native";
 import { downloadInServer } from "../lib/downloadSongs";
+import { useTheme } from "../stores/theme";
+import Button from "./ui/Button";
 
 function SearchDownload() {
   const [value, setValue] = useState("");
+  const { themes, currentTheme } = useTheme();
 
   const onPress = async () => {
     if (value.length === 0) {
@@ -24,16 +27,16 @@ function SearchDownload() {
         Download from YT into Server
       </Text>
       <TextInput
-        className="p-1 text-white border-2 border-indigo-700 rounded-md bg-none"
+        className={`p-1 text-white border-2 border-${themes[currentTheme].bgTailwindColor} rounded-md bg-none`}
         onChangeText={setValue}
         value={value}
         placeholder="youtube link"
       />
-      <Pressable className="py-2 bg-indigo-700 rounded" onPress={onPress}>
+      <Button onPress={onPress}>
         <Text className="text-lg text-center text-white">
           Download in Server
         </Text>
-      </Pressable>
+      </Button>
     </>
   );
 }

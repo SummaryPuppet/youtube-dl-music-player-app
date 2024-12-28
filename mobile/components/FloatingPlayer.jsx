@@ -1,12 +1,14 @@
 import { router } from "expo-router";
 import { Pressable, View } from "react-native";
 import { useActiveTrack } from "react-native-track-player";
+import { useTheme } from "../stores/theme";
 import { PlayButton } from "./PlayerControls";
 import QueueButton from "./QueueButton";
 import MarqueeText from "./ui/MarqueeText";
 
 function FloatingPlayer() {
   const track = useActiveTrack();
+  const { themes, currentTheme } = useTheme();
 
   const onPress = () => {
     router.push("player/");
@@ -16,7 +18,7 @@ function FloatingPlayer() {
 
   return (
     <View
-      className={`absolute flex-row items-center self-center justify-around w-screen h-14 bg-indigo-900 rounded-2xl bottom-14 px-2`}
+      className={`absolute flex-row items-center self-center justify-around w-screen h-14 bg-${themes[currentTheme].tailwindColor}-900 rounded-2xl bottom-14 px-2`}
     >
       <Pressable onPress={onPress} className="justify-center w-4/5 h-full">
         <MarqueeText text={track?.title ?? ""} />

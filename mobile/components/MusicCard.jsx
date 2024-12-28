@@ -1,10 +1,12 @@
 import Feather from "@expo/vector-icons/Feather";
 import { Pressable, Text } from "react-native";
-import { primaryColor } from "../constants/colors";
 
+import { useTheme } from "../stores/theme";
 import Card from "./ui/Card";
 
 export default function MusicCard({ title, titleOnPress, sound, moreOnPress }) {
+  const { themes, currentTheme } = useTheme();
+
   return (
     <Card className="flex-row justify-between gap-3">
       <Pressable onPress={() => titleOnPress(sound)} className="w-5/6">
@@ -13,7 +15,11 @@ export default function MusicCard({ title, titleOnPress, sound, moreOnPress }) {
         </Text>
       </Pressable>
       <Pressable onPress={() => moreOnPress(sound)}>
-        <Feather name="more-vertical" color={primaryColor} size={34} />
+        <Feather
+          name="more-vertical"
+          color={themes[currentTheme].primaryColor}
+          size={34}
+        />
       </Pressable>
     </Card>
   );

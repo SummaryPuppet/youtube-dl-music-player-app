@@ -49,11 +49,11 @@ export default function ListDownload() {
         <FlatList
           data={serverSongs}
           keyExtractor={(item) => item.id}
-          ItemSeparatorComponent={<ItemDivider />}
+          ItemSeparatorComponent={() => <ItemDivider />}
           ListEmptyComponent={
             <Text className="text-lg text-white">No connect to server</Text>
           }
-          ListFooterComponent={<ItemDivider h="24" />}
+          ListFooterComponent={() => <ItemDivider h="24" />}
           renderItem={({ item }) => (
             <DownloadCard
               title={item.title}

@@ -3,13 +3,15 @@ import { BlurView } from "expo-blur";
 import { Tabs } from "expo-router";
 import { StyleSheet } from "react-native";
 import FloatingPlayer from "../../components/FloatingPlayer";
-import { primaryColor } from "../../constants/colors";
+import { useTheme } from "../../stores/theme";
 export default function TabsLayout() {
+  const { themes, currentTheme } = useTheme();
+
   return (
     <>
       <Tabs
         screenOptions={{
-          tabBarActiveTintColor: primaryColor,
+          tabBarActiveTintColor: themes[currentTheme].primaryColor,
           tabBarLabelStyle: {
             fontSize: 10,
             fontWeight: "500",

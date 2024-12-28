@@ -1,9 +1,17 @@
 import { LinearGradient } from "expo-linear-gradient";
-import { bgPrimaryColor } from "../../constants/colors";
+import { useTheme } from "../../stores/theme";
 
 export default function ScreenContainer(props) {
+  const { themes, currentTheme } = useTheme();
+
   return (
-    <LinearGradient colors={["#312e81", bgPrimaryColor]} {...props}>
+    <LinearGradient
+      colors={[
+        themes[currentTheme].secondaryColor,
+        themes[currentTheme].bgPrimaryColor,
+      ]}
+      {...props}
+    >
       {props.children}
     </LinearGradient>
   );
