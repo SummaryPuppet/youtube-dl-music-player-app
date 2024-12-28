@@ -1,6 +1,6 @@
 // import { router } from "expo-router";
 import { useEffect, useState } from "react";
-import { Alert, FlatList, RefreshControl, Text } from "react-native";
+import { Alert, FlatList, RefreshControl } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 // import MusicCard from "../../components/MusicCard";
 import { router } from "expo-router";
@@ -63,7 +63,6 @@ export default function MainPage() {
       }}
       className="h-screen"
     >
-      <Text className="px-2 text-3xl font-bold text-white">Search: </Text>
       <SearchSound />
 
       <FlatList
