@@ -16,5 +16,17 @@ export const theme = {
         secondaryColor: "#9D2C3C",
         bgPrimaryColor: "#740938",
         settingPlaceholdeColor: "#CC2B52"
-    }
+    },
+    blue: {
+        primaryColor: "#2563EB",
+        secondaryColor: "#1E40AF",
+        bgPrimaryColor: "#1E293B",
+        settingPlaceholdeColor: "#3B82F6"
+    },
+    pink: {
+        primaryColor: "#D946EF",
+        secondaryColor: "#A434B5",
+        bgPrimaryColor: "#6F247B",
+        settingPlaceholdeColor: "#F472B6"
+    },
 }
