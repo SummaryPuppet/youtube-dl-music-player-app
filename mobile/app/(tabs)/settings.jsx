@@ -55,7 +55,7 @@ export default function SettingsPage() {
 
         <View className="flex flex-row gap-5">
           {Object.entries(themes).map(([theme, value]) => (
-            <Pressable onPress={async () => await setTheme(theme)}>
+            <Pressable onPress={async () => await setTheme(theme)} key={theme}>
               <View
                 style={{
                   width: 48,
