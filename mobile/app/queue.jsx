@@ -4,11 +4,13 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import TrackPlayer, { useActiveTrack } from "react-native-track-player";
 import Card from "../components/ui/Card";
 import ScreenContainer from "../components/ui/ScreenContainer";
+import { useTheme } from "../stores/theme";
 
 export default function QueueScreen() {
   const insets = useSafeAreaInsets();
   const activeTrack = useActiveTrack();
   const [tracks, setTracks] = useState([]);
+  const { themes, currentTheme } = useTheme();
 
   const onPress = async (trackIndex) => {
     await TrackPlayer.skip(trackIndex);
@@ -35,7 +37,12 @@ export default function QueueScreen() {
         data={tracks}
         renderItem={({ item: track, index }) => (
           <Card
-            className={`${track?.title === activeTrack?.title ? "bg-indigo-500/50 rounded-lg" : ""} px-3`}
+            style={{
+              backgroundColor:
+                track?.title === activeTrack?.title
+                  ? themes[currentTheme].primaryColor
+                  : "transparent",
+            }}
           >
             <Pressable onPress={() => onPress(index)}>
               <Text className={`text-xl text-white`}>{track?.title}</Text>
