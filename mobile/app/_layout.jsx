@@ -5,12 +5,16 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import TrackPlayer from "react-native-track-player";
 import { setupTrackPlayer } from "../lib/sound";
+import { getTheme } from "../stores/theme";
 
 TrackPlayer.registerPlaybackService(() => require("../services/service.js"));
 
 export default function RootLayout() {
   useEffect(() => {
     setupTrackPlayer().catch((err) => console.error(err));
+    getTheme()
+      .then()
+      .catch((err) => console.error(err));
   }, []);
 
   return (

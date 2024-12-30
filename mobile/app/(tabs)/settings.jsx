@@ -5,10 +5,10 @@ import Button from "../../components/ui/Button";
 import ScreenContainer from "../../components/ui/ScreenContainer";
 import { serverURI } from "../../constants/serverURI";
 import { storage } from "../../storage/storage";
-import { useTheme } from "../../stores/theme";
+import { setTheme, useTheme } from "../../stores/theme";
 
 export default function SettingsPage() {
-  const { themes, setTheme } = useTheme();
+  const { themes } = useTheme();
   const [serverURL, setServerURL] = useState("");
 
   const insets = useSafeAreaInsets();
@@ -55,7 +55,7 @@ export default function SettingsPage() {
 
         <View className="flex flex-row gap-5">
           {Object.entries(themes).map(([theme, value]) => (
-            <Pressable onPress={() => setTheme(theme)}>
+            <Pressable onPress={async () => await setTheme(theme)}>
               <View
                 style={{
                   width: 48,
