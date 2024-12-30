@@ -45,7 +45,9 @@ export default function QueueScreen() {
             }}
           >
             <Pressable onPress={() => onPress(index)}>
-              <Text className={`text-xl text-white`}>{track?.title}</Text>
+              <Text className={`text-xl text-white`} numberOfLines={1}>
+                {track?.title}
+              </Text>
             </Pressable>
           </Card>
         )}
