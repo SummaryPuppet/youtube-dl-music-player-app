@@ -27,7 +27,8 @@ function SearchDownload() {
         Download from YT into Server
       </Text>
       <TextInput
-        className={`p-1 text-white border-2 border-${themes[currentTheme].bgTailwindColor} rounded-md bg-none`}
+        style={{ borderColor: themes[currentTheme].primaryColor }}
+        className={`p-1 text-white border-2 rounded-md bg-none`}
         onChangeText={setValue}
         value={value}
         placeholder="youtube link"

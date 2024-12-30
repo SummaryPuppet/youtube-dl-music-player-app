@@ -13,7 +13,8 @@ export default function SearchSound() {
   return (
     <View className="flex flex-row items-center justify-between w-full gap-2 p-2 py-3">
       <TextInput
-        className={`w-5/6 p-1 text-lg text-white border-2 border-${themes[currentTheme].bgTailwindColor} rounded-lg`}
+        style={{ borderColor: themes[currentTheme].primaryColor }}
+        className={`w-5/6 p-1 text-lg text-white border-2 rounded-lg`}
         onChangeText={onChangeText}
       />
       <Feather
