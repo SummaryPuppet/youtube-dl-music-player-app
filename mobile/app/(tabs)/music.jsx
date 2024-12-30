@@ -5,6 +5,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import TrackPlayer from "react-native-track-player";
 import MusicCard from "../../components/MusicCard";
 import SearchSound from "../../components/SearchSound";
+import ShuffleButton from "../../components/ShuffleButton";
 import ItemDivider from "../../components/ui/ItemDivider";
 import ScreenContainer from "../../components/ui/ScreenContainer";
 import { generateTrackPlayerSongsFormat, getSounds } from "../../lib/sound";
@@ -62,6 +63,8 @@ export default function MainPage() {
       className="h-screen"
     >
       <SearchSound />
+
+      <ShuffleButton />
 
       <FlatList
         className="px-2"
