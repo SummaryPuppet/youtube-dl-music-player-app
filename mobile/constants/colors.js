@@ -4,13 +4,15 @@ export const theme = {
         secondaryColor: "#312e81",
         bgPrimaryColor: "#111827",
         bgTailwindColor: "indigo-700",
-        tailwindColor: "indigo"
+        tailwindColor: "indigo",
+        settingPlaceholdeColor: "#6366F1"
     },
     green: {
         primaryColor: "#047857",
         secondaryColor: "#065f46",
         bgPrimaryColor: "#011710",
         bgTailwindColor: "emerald-700",
-        tailwindColor: "emerald"
+        tailwindColor: "emerald",
+        settingPlaceholdeColor: "#10B981"
     },
 }

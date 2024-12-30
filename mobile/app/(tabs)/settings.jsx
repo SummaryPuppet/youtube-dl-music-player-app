@@ -8,7 +8,7 @@ import { storage } from "../../storage/storage";
 import { useTheme } from "../../stores/theme";
 
 export default function SettingsPage() {
-  const { setTheme } = useTheme();
+  const { themes, setTheme } = useTheme();
   const [serverURL, setServerURL] = useState("");
 
   const insets = useSafeAreaInsets();
@@ -54,16 +54,17 @@ export default function SettingsPage() {
         <Text className="text-lg text-white">Themes</Text>
 
         <View className="flex flex-row gap-5">
-          <Pressable onPress={() => setTheme("purple")}>
-            <View
-              style={{ width: 48, height: 48, backgroundColor: "#6366F1" }}
-            />
-          </Pressable>
-          <Pressable onPress={() => setTheme("green")}>
-            <View
-              style={{ width: 48, height: 48, backgroundColor: "#10B981" }}
-            />
-          </Pressable>
+          {Object.entries(themes).map(([theme, value]) => (
+            <Pressable onPress={() => setTheme(theme)}>
+              <View
+                style={{
+                  width: 48,
+                  height: 48,
+                  backgroundColor: value.settingPlaceholdeColor,
+                }}
+              />
+            </Pressable>
+          ))}
         </View>
       </View>
 
