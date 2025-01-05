@@ -22,16 +22,14 @@ export default function QueueScreen() {
       .catch((e) => console.error(e));
   }, []);
 
-  // if (playbackQueue.length === 0) {
-  //   router("/");
-  // }
-
   return (
     <ScreenContainer
       style={{ paddingTop: insets.top, paddingBottom: insets.bottom }}
       className="h-full"
     >
-      <Text className="px-3 text-4xl font-semibold text-white">Queue: </Text>
+      <Text className="py-4 text-4xl font-semibold text-center text-white">
+        Queue
+      </Text>
       <FlatList
         className="px-2"
         data={tracks}
