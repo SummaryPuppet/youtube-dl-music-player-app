@@ -8,7 +8,10 @@ export default function QueueButton({ size = 58, color = "white" }) {
   };
 
   return (
-    <Pressable onPress={onPress}>
+    <Pressable
+      onPress={onPress}
+      style={({ pressed }) => [{ opacity: pressed ? 0.5 : 1 }]}
+    >
       <MaterialIcons size={size} color={color} name="queue-music" />
     </Pressable>
   );

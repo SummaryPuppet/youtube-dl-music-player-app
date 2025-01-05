@@ -19,7 +19,11 @@ export default function MuteButton({ size = 24, color = "white" }) {
   }, []);
 
   return (
-    <Pressable onPress={onPress} className="justify-center">
+    <Pressable
+      onPress={onPress}
+      className="justify-center"
+      style={({ pressed }) => [{ opacity: pressed ? 0.5 : 1 }]}
+    >
       <FontAwesome5
         name={volume === 0 ? "volume-mute" : "volume-up"}
         size={size}

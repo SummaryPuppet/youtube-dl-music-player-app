@@ -20,7 +20,10 @@ export default function RepeatButton({
   }, []);
 
   return (
-    <Pressable onPress={onPress}>
+    <Pressable
+      onPress={onPress}
+      style={({ pressed }) => [{ opacity: pressed ? 0.5 : 1 }]}
+    >
       <Feather
         name="repeat"
         size={size}

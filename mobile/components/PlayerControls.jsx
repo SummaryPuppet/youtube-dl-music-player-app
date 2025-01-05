@@ -19,7 +19,14 @@ export const PlayButton = ({ size = 58, color = "white" }) => {
   };
 
   return (
-    <Pressable onPress={onPress}>
+    <Pressable
+      onPress={onPress}
+      style={({ pressed }) => [
+        {
+          opacity: pressed ? 0.5 : 1,
+        },
+      ]}
+    >
       <Feather name={playing ? "pause" : "play"} color={color} size={size} />
     </Pressable>
   );
@@ -35,7 +42,14 @@ export const SkipToPreviousButton = ({ size = 38, color = "white" }) => {
   };
 
   return (
-    <Pressable onPress={onPress}>
+    <Pressable
+      onPress={onPress}
+      style={({ pressed }) => [
+        {
+          opacity: pressed ? 0.5 : 1,
+        },
+      ]}
+    >
       <FontAwesome name="step-backward" color={color} size={size} />
     </Pressable>
   );
@@ -51,7 +65,14 @@ export const SkipToNextButton = ({ size = 38, color = "white" }) => {
   };
 
   return (
-    <Pressable onPress={onPress}>
+    <Pressable
+      onPress={onPress}
+      style={({ pressed }) => [
+        {
+          opacity: pressed ? 0.5 : 1,
+        },
+      ]}
+    >
       <FontAwesome name="step-forward" color={color} size={size} />
     </Pressable>
   );
