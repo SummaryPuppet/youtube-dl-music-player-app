@@ -49,6 +49,16 @@ export default function TabsLayout() {
           }}
         />
         <Tabs.Screen
+          name="playlists"
+          options={{
+            headerShown: false,
+
+            tabBarIcon: ({ color }) => (
+              <Feather name="list" size={28} color={color} />
+            ),
+          }}
+        />
+        <Tabs.Screen
           name="download"
           options={{
             headerShown: false,

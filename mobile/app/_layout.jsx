@@ -59,6 +59,7 @@ const RootNavigation = () => {
           animation: "slide_from_right",
         }}
       />
+      <Stack.Screen name="createPlaylist" options={{ headerShown: false }} />
     </Stack>
   );
 };
