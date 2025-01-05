@@ -11,10 +11,12 @@ export default function SearchSound() {
   };
 
   return (
-    <View className="flex flex-row items-center justify-between w-full gap-2 p-2 py-3">
+    <View
+      style={{ borderColor: themes[currentTheme].primaryColor }}
+      className="flex flex-row items-center justify-around gap-2 pb-1 pr-2 m-2 border-2 rounded-full"
+    >
       <TextInput
-        style={{ borderColor: themes[currentTheme].primaryColor }}
-        className={`w-5/6 p-1 text-lg text-white border-2 rounded-lg`}
+        className={`w-5/6 p-1 text-lg text-white rounded-lg`}
         onChangeText={onChangeText}
       />
       <Feather
