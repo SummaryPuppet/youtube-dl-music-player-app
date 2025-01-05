@@ -70,7 +70,7 @@ export default function SettingsPage() {
       </View>
 
       <FloatingButton onPress={onPress}>
-        <Feather name="check" size={28} color="white" />
+        <Feather name="check" size={32} color="white" />
       </FloatingButton>
     </ScreenContainer>
   );
