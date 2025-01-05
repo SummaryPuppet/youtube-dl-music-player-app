@@ -42,7 +42,9 @@ export default function PlayerProgressBar() {
       />
 
       <View className="flex-row justify-between mt-4">
-        <Text className="text-white">0:00</Text>
+        <Text className="text-white">
+          {getMinutes(position)}:{getSeconds(position)}
+        </Text>
         <Text className="text-white">
           {getMinutes(duration)}:{getSeconds(duration)}
         </Text>
