@@ -4,6 +4,7 @@ import { Pressable, Text, TextInput, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import FloatingButton from "../../components/ui/FloatingButton";
 import ScreenContainer from "../../components/ui/ScreenContainer";
+import Title from "../../components/ui/Title";
 import { serverURI } from "../../constants/serverURI";
 import { storage } from "../../storage/storage";
 import { setTheme, useTheme } from "../../stores/theme";
@@ -38,9 +39,7 @@ export default function SettingsPage() {
       style={{ paddingTop: insets.top, paddingBottom: insets.bottom }}
       className="items-center h-full gap-4"
     >
-      <Text className="text-3xl font-semibold text-center text-white">
-        Settings
-      </Text>
+      <Title>Settings</Title>
 
       <View className="flex flex-col justify-center">
         <Text className="text-lg text-center text-white">ServerURL: </Text>

@@ -4,6 +4,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import TrackPlayer, { useActiveTrack } from "react-native-track-player";
 import Card from "../components/ui/Card";
 import ScreenContainer from "../components/ui/ScreenContainer";
+import Title from "../components/ui/Title";
 import { useTheme } from "../stores/theme";
 
 export default function QueueScreen() {
@@ -27,9 +28,7 @@ export default function QueueScreen() {
       style={{ paddingTop: insets.top, paddingBottom: insets.bottom }}
       className="h-full"
     >
-      <Text className="py-4 text-4xl font-semibold text-center text-white">
-        Queue
-      </Text>
+      <Title>Queue</Title>
       <FlatList
         className="px-2"
         data={tracks}
