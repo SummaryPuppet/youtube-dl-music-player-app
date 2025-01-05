@@ -23,6 +23,7 @@ export default function MainPage() {
     );
 
     const trackPlayerData = generateTrackPlayerSongsFormat(dataFiltered);
+    trackPlayerData.sort((a, b) => a.title.localeCompare(b.title));
     addTracks(trackPlayerData);
     addComputedTracks(trackPlayerData);
   };
