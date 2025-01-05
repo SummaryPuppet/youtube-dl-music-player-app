@@ -1,14 +1,15 @@
+import Feather from "@expo/vector-icons/Feather";
 import { useEffect, useState } from "react";
 import { Pressable, Text, TextInput, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import Button from "../../components/ui/Button";
+import FloatingButton from "../../components/ui/FloatingButton";
 import ScreenContainer from "../../components/ui/ScreenContainer";
 import { serverURI } from "../../constants/serverURI";
 import { storage } from "../../storage/storage";
 import { setTheme, useTheme } from "../../stores/theme";
 
 export default function SettingsPage() {
-  const { themes } = useTheme();
+  const { themes, currentTheme } = useTheme();
   const [serverURL, setServerURL] = useState("");
 
   const insets = useSafeAreaInsets();
@@ -68,9 +69,9 @@ export default function SettingsPage() {
         </View>
       </View>
 
-      <Button onPress={onPress} className="px-6 py-2 rounded-lg">
-        <Text className="text-lg text-center text-white">Apply changes</Text>
-      </Button>
+      <FloatingButton onPress={onPress}>
+        <Feather name="check" size={28} color="white" />
+      </FloatingButton>
     </ScreenContainer>
   );
 }

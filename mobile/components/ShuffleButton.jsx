@@ -1,11 +1,9 @@
 import Feather from "@expo/vector-icons/Feather";
-import { Pressable } from "react-native";
 import TrackPlayer, { useActiveTrack } from "react-native-track-player";
 import { useTracks } from "../stores/library";
-import { useTheme } from "../stores/theme";
+import FloatingButton from "./ui/FloatingButton";
 
 export default function ShuffleButton() {
-  const { themes, currentTheme } = useTheme();
   const tracks = useTracks();
   const track = useActiveTrack();
 
@@ -20,15 +18,9 @@ export default function ShuffleButton() {
   if (track) return null;
 
   return (
-    <Pressable
-      style={{
-        backgroundColor: themes[currentTheme].primaryColor,
-      }}
-      className="absolute z-50 p-4 rounded-full bottom-10 right-5"
-      onPress={onPress}
-    >
+    <FloatingButton onPress={onPress}>
       <Feather name="shuffle" size={32} color={"white"} />
-    </Pressable>
+    </FloatingButton>
   );
 }
 
