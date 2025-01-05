@@ -18,15 +18,19 @@ export default function PlayerModalPage() {
   return (
     <ScreenContainer className={`items-center h-full`}>
       <View className="justify-around flex-1 h-ful">
+        <View></View>
+
         <ArtworkImage uri={track?.artwork} />
 
-        <View className="px-2">
-          <PlayerProgressBar />
-        </View>
+        <View className="gap-8">
+          <View className="px-2">
+            <PlayerProgressBar />
+          </View>
 
-        <Text className="text-xl font-semibold text-center text-white ">
-          {track?.title ?? ""}
-        </Text>
+          <Text className="text-xl font-semibold text-center text-white ">
+            {track?.title ?? ""}
+          </Text>
+        </View>
 
         <View className="flex-row items-center justify-around">
           <SkipToPreviousButton size={23} />
