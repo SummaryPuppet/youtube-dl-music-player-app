@@ -52,6 +52,11 @@ const RootNavigation = () => {
         name="queue"
         options={{
           headerShown: false,
+          presentation: "card",
+          gestureEnabled: true,
+          gestureDirection: "horizontal",
+          animationDuration: 400,
+          animation: "slide_from_right",
         }}
       />
     </Stack>
