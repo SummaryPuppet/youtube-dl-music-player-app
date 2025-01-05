@@ -9,7 +9,7 @@ import { storage } from "../../storage/storage";
 import { setTheme, useTheme } from "../../stores/theme";
 
 export default function SettingsPage() {
-  const { themes, currentTheme } = useTheme();
+  const { themes } = useTheme();
   const [serverURL, setServerURL] = useState("");
 
   const insets = useSafeAreaInsets();
@@ -36,14 +36,14 @@ export default function SettingsPage() {
   return (
     <ScreenContainer
       style={{ paddingTop: insets.top, paddingBottom: insets.bottom }}
-      className="h-full gap-4"
+      className="items-center h-full gap-4"
     >
       <Text className="text-3xl font-semibold text-center text-white">
         Settings
       </Text>
 
       <View className="flex flex-col justify-center">
-        <Text className="text-lg text-white">ServerURL: </Text>
+        <Text className="text-lg text-center text-white">ServerURL: </Text>
         <TextInput
           onChangeText={setServerURL}
           value={serverURL}
@@ -51,10 +51,10 @@ export default function SettingsPage() {
         />
       </View>
 
-      <View className="mb-3">
-        <Text className="text-lg text-white">Themes</Text>
+      <View className="gap-2">
+        <Text className="text-lg text-center text-white">Themes</Text>
 
-        <View className="flex flex-row gap-5">
+        <View className="flex flex-row gap-2">
           {Object.entries(themes).map(([theme, value]) => (
             <Pressable onPress={async () => await setTheme(theme)} key={theme}>
               <View
@@ -62,6 +62,7 @@ export default function SettingsPage() {
                   width: 48,
                   height: 48,
                   backgroundColor: value.settingPlaceholdeColor,
+                  borderRadius: 24,
                 }}
               />
             </Pressable>
